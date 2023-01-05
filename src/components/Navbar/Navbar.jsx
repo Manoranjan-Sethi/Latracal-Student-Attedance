@@ -7,6 +7,9 @@ function Navbar() {
     <div className="header">
       <h1>Students Attendance</h1>
       <nav className="navbar">
+        <Link className="link-a" to="/">
+          Home
+        </Link>
         <Link className="link-a" to="/form">
           Add Student's Attendance
         </Link>

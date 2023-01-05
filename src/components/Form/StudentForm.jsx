@@ -1,35 +1,17 @@
-import React, { useState } from "react";
+import React from "react";
 import "./StudentForm.css";
+import { initialValues } from "../../App";
 
-const initialValues = {
-  name: "",
-  roll: "",
-  date: "",
-  checkIn: "",
-  checkOut: "",
-};
-
-function StudentForm() {
-  // const [name, setName] = useState("");
-  // const [roll, setRoll] = useState("");
-  // const [date, setDate] = useState("");
-  // const [checkIn, setCheckIn] = useState("");
-  // const [checkOut, setCheckOut] = useState("");
-  const [data, setData] = useState(initialValues);
-  // const [allData, setAllData] = useState([]);
-
+function StudentForm({ data, setData }) {
   function handleSubmit(event) {
     event.preventDefault();
-
-    // const data = { name, roll, date, checkIn, checkOut };
-
     fetch("https://filthy-ray-leather-jacket.cyclic.app/students", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(data),
     }).then(() => {
       alert("Form Submitted Sucessfully");
-      // setData(null);
+      setData(initialValues);
     });
   }
 
@@ -44,17 +26,24 @@ function StudentForm() {
             name="name"
             placeholder="Name of the Student"
             required
+            value={data.name}
             onChange={(e) => setData({ ...data, name: e.target.value })}
           />
         </div>
         <div>
           <label>Student's Roll Number</label>
           <input
-            type="number"
+            type="text"
             name="roll"
             placeholder="Roll of the Student"
             required
-            onChange={(e) => setData({ ...data, roll: e.target.value })}
+            value={data.roll}
+            onChange={(e) => {
+              const regex = /^[0-9\b]+$/; //only numbers are allowed
+              if (!(e.target.value === "" || regex.test(e.target.value)))
+                return;
+              setData({ ...data, roll: e.target.value });
+            }}
           />
         </div>
         <div>
@@ -63,6 +52,7 @@ function StudentForm() {
             type="date"
             name="date"
             required
+            value={data.date}
             onChange={(e) => setData({ ...data, date: e.target.value })}
           />
         </div>
@@ -72,6 +62,7 @@ function StudentForm() {
             type="time"
             name="checkIn"
             required
+            value={data.checkIn}
             onChange={(e) => setData({ ...data, checkIn: e.target.value })}
           />
         </div>
@@ -81,6 +72,7 @@ function StudentForm() {
             type="time"
             name="checkOut"
             required
+            value={data.checkOut}
             onChange={(e) => setData({ ...data, checkOut: e.target.value })}
           />
         </div>
