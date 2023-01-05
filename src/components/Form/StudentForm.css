@@ -1,5 +1,58 @@
-body {
+.form {
   display: flex;
   justify-content: center;
-  align-items: center;
+}
+
+.form h1 {
+  color: rgb(14, 21, 1);
+}
+
+form {
+  width: 50vh;
+  width: 500px;
+  padding: 20px;
+  color: #fff;
+  font-weight: bolder;
+}
+
+form div {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 20px;
+}
+
+form label {
+  font-size: 18px;
+  font-weight: 600;
+  margin-bottom: 10px;
+}
+
+form input {
+  height: 40px;
+  width: 100%;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  padding: 0 10px;
+}
+
+form input[type="date"] {
+  width: 30%;
+}
+
+form input[type="time"] {
+  width: 25%;
+}
+
+button {
+  background-color: #0d47a1;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  font-size: 18px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: #1976d2;
 }

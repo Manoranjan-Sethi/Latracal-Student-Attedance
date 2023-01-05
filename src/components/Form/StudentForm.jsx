@@ -1,23 +1,42 @@
 import React, { useState } from "react";
 import "./StudentForm.css";
 
+const initialValues = {
+  name: "",
+  roll: "",
+  date: "",
+  checkIn: "",
+  checkOut: "",
+};
+
 function StudentForm() {
-  const [name, setName] = useState("");
-  const [roll, setRoll] = useState("");
-  const [date, setDate] = useState("");
-  const [checkIn, setCheckIn] = useState("");
-  const [checkOut, setCheckOut] = useState("");
+  // const [name, setName] = useState("");
+  // const [roll, setRoll] = useState("");
+  // const [date, setDate] = useState("");
+  // const [checkIn, setCheckIn] = useState("");
+  // const [checkOut, setCheckOut] = useState("");
+  const [data, setData] = useState(initialValues);
+  // const [allData, setAllData] = useState([]);
 
   function handleSubmit(event) {
     event.preventDefault();
 
-    const data = { name, roll, date, checkIn, checkOut };
+    // const data = { name, roll, date, checkIn, checkOut };
+
+    fetch("https://filthy-ray-leather-jacket.cyclic.app/students", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(data),
+    }).then(() => {
+      alert("Form Submitted Sucessfully");
+      // setData(null);
+    });
   }
 
   return (
-    <div>
-      <h1>Students Form</h1>
+    <div className="form">
       <form onSubmit={handleSubmit}>
+        <h1>Student's Form</h1>
         <div>
           <label>Student's Name</label>
           <input
@@ -25,7 +44,7 @@ function StudentForm() {
             name="name"
             placeholder="Name of the Student"
             required
-            onChange={(e) => setName(e.target.value)}
+            onChange={(e) => setData({ ...data, name: e.target.value })}
           />
         </div>
         <div>
@@ -35,7 +54,7 @@ function StudentForm() {
             name="roll"
             placeholder="Roll of the Student"
             required
-            onChange={(e) => setRoll(e.target.value)}
+            onChange={(e) => setData({ ...data, roll: e.target.value })}
           />
         </div>
         <div>
@@ -44,7 +63,7 @@ function StudentForm() {
             type="date"
             name="date"
             required
-            onChange={(e) => setDate(e.target.value)}
+            onChange={(e) => setData({ ...data, date: e.target.value })}
           />
         </div>
         <div>
@@ -53,18 +72,22 @@ function StudentForm() {
             type="time"
             name="checkIn"
             required
-            onChange={(e) => setCheckIn(e.target.value)}
+            onChange={(e) => setData({ ...data, checkIn: e.target.value })}
           />
+        </div>
+        <div>
           <label>Check Out</label>
           <input
             type="time"
             name="checkOut"
             required
-            onChange={(e) => setCheckOut(e.target.value)}
+            onChange={(e) => setData({ ...data, checkOut: e.target.value })}
           />
         </div>
+        <div>
+          <button>Submit</button>
+        </div>
       </form>
-      <button>Submit</button>
     </div>
   );
 }
