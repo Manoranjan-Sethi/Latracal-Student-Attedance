@@ -1,6 +1,6 @@
 # Students Attendance App
 
-- [Click here](https://rococo-genie-e021dc.netlify.app/) to see preview of our project.
+- [Click here](https://rococo-genie-e021dc.netlify.app/) to see preview of my project.
 
 ## Tech Stack
 
